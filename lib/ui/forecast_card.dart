@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:weather_forecast/model/weahter_forecast_model.dart';
 import 'package:weather_forecast/weather_forecast/util/forecast_icon.dart';
 
 import 'package:weather_forecast/weather_forecast/util/forecast_util.dart';
-
-Widget forecastCard(AsyncSnapshot<WeatherForecastModel> snapshot, int index) {
-  var forecastList = snapshot.data!.list;
+Widget forecastCard(snapshot, int index) {
+  var forecastList = snapshot['list'];
   var dayOfWeek = "";
   DateTime date =
-      new DateTime.fromMillisecondsSinceEpoch(forecastList[index].dt * 1000);
+      new DateTime.fromMillisecondsSinceEpoch(forecastList[index]['dt'] * 1000);
   var fullDate = Util.getFormateDate(date);
   dayOfWeek = fullDate.split(",")[0]; //[Saturday,Dec 14,2019]
 
@@ -38,7 +36,7 @@ Widget forecastCard(AsyncSnapshot<WeatherForecastModel> snapshot, int index) {
                  */
             //source: https://github.com/brianegan/font_awesome_flutter/issues/28#issuecomment-460109786
             child: getWeatherIcon(
-                weatherDescription: forecastList[index].weather[0].main,
+                weatherDescription: forecastList[index]['weather'][0]['main'],
                 color: Colors.pinkAccent,
                 size: 45),
           ),
@@ -49,7 +47,7 @@ Widget forecastCard(AsyncSnapshot<WeatherForecastModel> snapshot, int index) {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Text(
-                        "${forecastList[index].temp.min.toStringAsFixed(0)} °F"),
+                        "${forecastList[index]['temp']['min'].toStringAsFixed(0)} °F"),
                   ),
                   Icon(
                     FontAwesomeIcons.solidArrowAltCircleDown,
@@ -63,7 +61,7 @@ Widget forecastCard(AsyncSnapshot<WeatherForecastModel> snapshot, int index) {
                 child: Row(
                   children: <Widget>[
                     Text(
-                        "${forecastList[index].temp.max.toStringAsFixed(0)} °F"),
+                        "${forecastList[index]['temp']['max'].toStringAsFixed(0)} °F"),
                     Icon(
                       FontAwesomeIcons.solidArrowAltCircleUp,
                       color: Colors.white,
@@ -77,7 +75,7 @@ Widget forecastCard(AsyncSnapshot<WeatherForecastModel> snapshot, int index) {
                 child: Row(
                   children: <Widget>[
                     Text(
-                        "Hum:${forecastList[index].humidity.toStringAsFixed(0)} %"),
+                        "Hum:${forecastList[index]['humidity'].toStringAsFixed(0)} %"),
 //                     Icon(FontAwesomeIcons.solidGrinBeamSweat, color: Colors.white,
 //                       size: 17,)
                   ],
@@ -88,7 +86,7 @@ Widget forecastCard(AsyncSnapshot<WeatherForecastModel> snapshot, int index) {
                 child: Row(
                   children: <Widget>[
                     Text(
-                        "Win:${forecastList[index].speed.toStringAsFixed(1)} mi/h"),
+                        "Win:${forecastList[index]['speed'].toStringAsFixed(1)} mi/h"),
 //                     Icon(FontAwesomeIcons.wind, color: Colors.white,
 //                       size: 17,)
                   ],

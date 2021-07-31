@@ -13,30 +13,25 @@ class WeatherForecastModel {
       required this.list});
 
   WeatherForecastModel.fromJson(Map<String, dynamic> json) {
-    city =  new City.fromJson(json['city']) ;
+    city = (json['city'] != null ? new City.fromJson(json['city']) : null)!;
     cod = json['cod'];
-    message = json['message'].toDouble();
+    message = json['message'];
     cnt = json['cnt'];
-    
-      // ignore: deprecated_member_use
-      list = new List<Lista>.empty();
+    if (json['list'] != null) {
+      list = [];
       json['list'].forEach((v) {
         list.add(new Lista.fromJson(v));
       });
-    
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    
-      data['city'] = this.city.toJson();
-    
+    data['city'] = this.city.toJson();
     data['cod'] = this.cod;
     data['message'] = this.message;
     data['cnt'] = this.cnt;
-    
-      data['list'] = this.list.map((v) => v.toJson()).toList();
-    
+    data['list'] = this.list.map((v) => v.toJson()).toList();
     return data;
   }
 }
@@ -60,7 +55,7 @@ class City {
   City.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    //coord = (json['coord'] != null ? new Coord.fromJson(json['coord']) : null)!;
+    coord = (json['coord'] != null ? new Coord.fromJson(json['coord']) : null)!;
     country = json['country'];
     population = json['population'];
     timezone = json['timezone'];
@@ -70,9 +65,7 @@ class City {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    
-      data['coord'] = this.coord.toJson();
-    
+    data['coord'] = this.coord.toJson();
     data['country'] = this.country;
     data['population'] = this.population;
     data['timezone'] = this.timezone;
@@ -131,27 +124,25 @@ class Lista {
 
   Lista.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
-    // ignore: unused_local_variable
-    //sunrise = json['sunrise'];
-    //sunset = json['sunset'];
-    // temp = (json['temp'] != null ? new Temp.fromJson(json['temp']) : null)!;
-    // feelsLike = (json['feels_like'] != null
-    //     ? new FeelsLike.fromJson(json['feels_like'])
-    //     : null)!;
+    sunrise = json['sunrise'];
+    sunset = json['sunset'];
+    temp = (json['temp'] != null ? new Temp.fromJson(json['temp']) : null)!;
+    feelsLike = (json['feels_like'] != null
+        ? new FeelsLike.fromJson(json['feels_like'])
+        : null)!;
     pressure = json['pressure'];
     humidity = json['humidity'];
-    
-      // ignore: deprecated_member_use
-      weather = new List<Weather>.empty();
+    if (json['weather'] != null) {
+      weather = [];
       json['weather'].forEach((v) {
-        weather.add(new Weather.fromJson(v));
+       weather.add(new Weather.fromJson(v));
       });
-    
+    }
     speed = json['speed'];
     deg = json['deg'];
     clouds = json['clouds'];
-    snow = json['snow'];
-    rain = json['rain'];
+    snow = json['snow'] ?? 0;
+    rain = json['rain'] ?? 0;
   }
 
   Map<String, dynamic> toJson() {
@@ -159,17 +150,11 @@ class Lista {
     data['dt'] = this.dt;
     data['sunrise'] = this.sunrise;
     data['sunset'] = this.sunset;
-    
-      data['temp'] = this.temp.toJson();
-    
-    
-      data['feels_like'] = this.feelsLike.toJson();
-    
+    data['temp'] = this.temp.toJson();
+    data['feels_like'] = this.feelsLike.toJson();
     data['pressure'] = this.pressure;
     data['humidity'] = this.humidity;
-    
-      data['weather'] = this.weather.map((v) => v.toJson()).toList();
-    
+    data['weather'] = this.weather.map((v) => v.toJson()).toList();
     data['speed'] = this.speed;
     data['deg'] = this.deg;
     data['clouds'] = this.clouds;
