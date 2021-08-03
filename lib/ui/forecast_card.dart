@@ -37,7 +37,7 @@ Widget forecastCard(snapshot, int index) {
             //source: https://github.com/brianegan/font_awesome_flutter/issues/28#issuecomment-460109786
             child: getWeatherIcon(
                 weatherDescription: forecastList[index]['weather'][0]['main'],
-                color: Colors.pinkAccent,
+                color: Colors.blueAccent,
                 size: 45),
           ),
           Column(

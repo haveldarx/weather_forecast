@@ -41,8 +41,8 @@ class MidView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: getWeatherIcon(
-                  weatherDescription: forecastList[0]['weather'][0]['main'],
-                  color: Colors.pinkAccent,
+                  weatherDescription: forecastList[0]['weather'][0]['description'],
+                  color: Colors.blueAccent,
                   size: 198),
             ),
             //Icon(FontAwesomeIcons.cloud, size: 198, color: Colors.pinkAccent,),
